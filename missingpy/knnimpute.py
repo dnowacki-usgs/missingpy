@@ -10,7 +10,6 @@ from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.utils import check_array
 from sklearn.utils.validation import check_is_fitted
 from sklearn.utils.validation import FLOAT_DTYPES
-from sklearn.neighbors._base import _check_weights
 from sklearn.neighbors._base import _get_weights
 
 from .pairwise_external import pairwise_distances
@@ -202,7 +201,6 @@ class KNNImputer(BaseEstimator, TransformerMixin):
                     "The selected metric does not support NaN values.")
         X = check_array(X, accept_sparse=False, dtype=np.float64,
                         force_all_finite=force_all_finite, copy=self.copy)
-        self.weights = _check_weights(self.weights)
 
         # Check for +/- inf
         if np.any(np.isinf(X)):
